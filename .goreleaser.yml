@@ -1,0 +1,56 @@
+project_name: MMC5603NJ
+
+release:
+  github:
+    owner: TheCacophonyProject
+    name: MMC5603NJ
+  name_template: '{{.Tag}}'
+
+builds:
+- id: MMC5603NJ
+  goos:
+  - linux
+  goarch:
+  - arm
+  goarm:
+  - "7"
+  main: ./cmd/mmc5603nj
+  ldflags: -s -w -X main.version={{.Version}}
+  binary: MMC5603NJ
+- id: sph0645l
+  goos:
+  - linux
+  goarch:
+  - arm
+  goarm:
+  - "7"
+  main: ./cmd/sph0645l
+  ldflags: -s -w -X main.version={{.Version}}
+  binary: sph0645l
+- id: sht3x
+  goos:
+  - linux
+  goarch:
+  - arm
+  goarm:
+  - "7"
+  main: ./cmd/sht3x
+  ldflags: -s -w -X main.version={{.Version}}
+  binary: sht3x
+
+
+nfpms:
+- vendor: The Cacophony Project
+  homepage: http://cacophony.org.nz/
+  maintainer: Cacophony Developers <coredev@cacophony.org.nz>
+  description: MMC5603NJ library and tester
+  license: GPL v3.0
+  file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Arch }}"
+  formats:
+    - deb
+  bindir: /usr/bin
+
+checksum:
+  name_template: '{{ .ProjectName }}_{{ .Version }}_checksums.txt'
+
+dist: dist
